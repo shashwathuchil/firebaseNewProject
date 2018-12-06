@@ -1,46 +1,77 @@
 <div>
+  <div class="m-b-10">Registration form</div>
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value, registerForm.valid)">
     <div class="form-group">
       <label for="name">Name</label>
       <input class="form-control" name="name" id="name" type="text" formControlName="name">
-      <div>
-
+      <div class="error" *ngIf="this.registerForm.controls.name.touched && !this.registerForm.controls.name.valid">
+        Please enter a name
       </div>
     </div>
     <div class="form-group">
       <label for="email">Email</label>
       <input class="form-control" name="email" id="email" type="email" formControlName="email" [email]="true">
+      <div class="error" *ngIf="this.registerForm.controls.email.touched && this.registerForm.controls.email.errors?.required">
+        Please enter a email
+      </div>
+      <div class="error" *ngIf="this.registerForm.controls.email.touched && this.registerForm.controls.email.errors?.email">
+          Please enter a valid email address
+      </div>
     </div>
     <div class="form-group">
       <label for="sex">Sex</label>
       <select class="form-control" name="sex" id="sex" type="sex" formControlName="sex">
-        <option  ngValue="male">Male</option>
+        <option ngValue="male">Male</option>
         <option ngValue="female">Female</option>
+        <option ngValue="other">Other</option>
       </select>
+      <div class="error" *ngIf="this.registerForm.controls.sex.touched && !this.registerForm.controls.sex.valid">
+        Please select the sex
+      </div>
     </div>
     <div class="form-group">
       <label for="phone">Phone</label>
       <input class="form-control" name="phone" id="phone" type="text" formControlName="phone">
+      <div class="error" *ngIf="this.registerForm.controls.phone.touched && this.registerForm.controls.phone.errors?.required">
+          Please enter a phone number
+      </div>
+      <div class="error" *ngIf="this.registerForm.controls.phone.touched && this.registerForm.controls.phone.errors?.minlength">
+          Phone number is lesser than 10 digits
+      </div>
+      <div class="error" *ngIf="this.registerForm.controls.phone.touched && this.registerForm.controls.phone.errors?.maxlength">
+          Phone number is more than 10 digits
+      </div>
     </div>
     <div class="form-group">
       <label for="userName">User name</label>
       <input class="form-control" name="userName" id="userName" type="text" formControlName="userName">
+      <div class="error" *ngIf="this.registerForm.controls.userName.touched && !this.registerForm.controls.userName.valid">
+          Please enter a user name
+        </div>
     </div>
     <div class="form-group">
       <label for="age">Age</label>
       <input class="form-control" name="age" id="age" type="number" formControlName="age">
+      <div class="error" *ngIf="this.registerForm.controls.age.touched && !this.registerForm.controls.age.valid">
+        Please enter a age
+      </div>
     </div>
     <div class="form-group">
       <label for="password">Password</label>
       <input class="form-control" name="password" id="password" type="password" formControlName="password">
+      <div class="error" *ngIf="this.registerForm.controls.password.touched && !this.registerForm.controls.password.valid">
+        Please select the sex
+      </div>
     </div>
     <div class="form-group">
       <label for="confirmPassword">Confirm password</label>
       <input class="form-control" name="confirmPassword" id="confirmPassword" type="password" formControlName="confirmPassword">
-      <div *ngIf="this.registerForm.touched && !(this.registerForm.value.password == this.registerForm.value.confirmPassword)" style="color: red">Passwords don't match</div>
+      <div *ngIf="this.registerForm.controls.confirmPassword.touched && !(this.registerForm.value.password == this.registerForm.value.confirmPassword)"
+        style="color: red">Passwords don't match</div>
     </div>
     <div>
-      <input [disabled]="this.registerForm.invalid || !(this.registerForm.value.password == this.registerForm.value.confirmPassword)" type="submit" value="submit"/>
+      <input [disabled]="this.registerForm.invalid || !(this.registerForm.value.password == this.registerForm.value.confirmPassword)"
+        type="submit" value="submit" />
     </div>
   </form>
 </div>

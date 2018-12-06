@@ -13,9 +13,9 @@ export class RegisterComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,public db: AngularFireDatabase) { 
     this.registerForm = this.formBuilder.group({
       'name': [null, Validators.required],
-      'email': [null,Validators.required],
+      'email': [null,[Validators.required,Validators.email]],
       'sex': [null,Validators.required],
-      'phone': [null,Validators.required],
+      'phone': [null,[Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
       'userName': [null, Validators.required],
       'age': [null,Validators.required],
       'password': [null,Validators.required],
@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
     delete value.confirmPassword;
     items.push(value);
     this.registerForm.reset();
-    
+
   }
 
 }

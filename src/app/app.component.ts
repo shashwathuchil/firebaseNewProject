@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { RegisterComponent } from './register/register.component'
+import { LoginComponent } from './login/login.component'
 
 @Component({
   selector: 'app-root',
@@ -11,14 +12,16 @@ import { RegisterComponent } from './register/register.component'
 export class AppComponent {
   title = 'firebaseNewProject';
   users:any=[];
-  // public fireOb: AngularFireObservable;
-  constructor(
-    db: AngularFireDatabase
-  ){
-    db.list('/users').valueChanges().subscribe(res=>{
-      this.users = res;
-      console.log(this.users);
-    })
+  notMember:boolean = true;
+  constructor(db: AngularFireDatabase){
+
+    // db.list('/users').valueChanges().subscribe(res=>{
+    //   this.users = res;
+    //   console.log(this.users);
+    // })
     
+  }
+  member(){
+    this.notMember = !this.notMember;
   }
 }

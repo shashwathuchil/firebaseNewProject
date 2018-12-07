@@ -60,14 +60,17 @@
       <label for="password">Password</label>
       <input class="form-control" name="password" id="password" type="password" formControlName="password">
       <div class="error" *ngIf="this.registerForm.controls.password.touched && !this.registerForm.controls.password.valid">
-        Please select the sex
+        Please enter a password
+      </div>
+      <div class="error" *ngIf="this.registerForm.controls.password.touched && this.registerForm.controls.password.errors?.minlength">
+        Password should be at least 6 characters
       </div>
     </div>
     <div class="form-group">
       <label for="confirmPassword">Confirm password</label>
       <input class="form-control" name="confirmPassword" id="confirmPassword" type="password" formControlName="confirmPassword">
-      <div *ngIf="this.registerForm.controls.confirmPassword.touched && !(this.registerForm.value.password == this.registerForm.value.confirmPassword)"
-        style="color: red">Passwords don't match</div>
+      <div class="error" *ngIf="this.registerForm.controls.confirmPassword.touched && !(this.registerForm.value.password == this.registerForm.value.confirmPassword)">
+        Passwords don't match</div>
     </div>
     <div>
       <input [disabled]="this.registerForm.invalid || !(this.registerForm.value.password == this.registerForm.value.confirmPassword)"

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import{ FormBuilder, FormGroup, Validator, Validators } from '@angular/forms'
 import { AngularFireDatabase } from 'angularfire2/database';
+import { AuthServiceService } from '../services/authServices/auth-service.service'
 
 @Component({
   selector: 'app-register',
@@ -10,7 +11,10 @@ import { AngularFireDatabase } from 'angularfire2/database';
 export class RegisterComponent implements OnInit {
   registerForm:FormGroup;
   
-  constructor(private formBuilder: FormBuilder,public db: AngularFireDatabase) { 
+  constructor(private formBuilder: FormBuilder,
+    public db: AngularFireDatabase, 
+    public authService:AuthServiceService,
+  ) { 
     this.registerForm = this.formBuilder.group({
       'name': [null, Validators.required],
       'email': [null,[Validators.required,Validators.email]],
@@ -18,8 +22,8 @@ export class RegisterComponent implements OnInit {
       'phone': [null,[Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
       'userName': [null, Validators.required],
       'age': [null,Validators.required],
-      'password': [null,Validators.required],
-      'confirmPassword': [null,Validators.required],
+      'password': [null,[Validators.required,Validators.minLength(6)]],
+      'confirmPassword': [null,[Validators.required]],
     });
     var items = db.list('/users').valueChanges();
     console.log(items)
@@ -28,12 +32,14 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
   }
+
   onSubmit(value,valid){
     console.log("value",value);
     console.log("validation",valid);
     const items = this.db.list('/users');
     delete value.confirmPassword;
     items.push(value);
+    this.authService.registerUser(value);
     this.registerForm.reset();
 
   }

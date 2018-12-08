@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import{ FormBuilder, FormGroup, Validator, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms'
 import { AngularFireDatabase } from 'angularfire2/database';
+// import {firestore} from 'firebase/app';
+import { AuthServiceService } from '../services/authServices/auth-service.service'
+import { CacheService } from '../services/cacheServices/cache.service'
+import { LoginService } from '../services/authServices/login.service'
 
 @Component({
   selector: 'app-login',
@@ -8,18 +12,50 @@ import { AngularFireDatabase } from 'angularfire2/database';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm:FormGroup
-  constructor(private formBuilder: FormBuilder,public db: AngularFireDatabase) {
+
+  loginForm: FormGroup;
+  mobileLogin: Boolean = false;
+  usernameLogin: Boolean = false;
+  emailLogin: Boolean = false;
+  recaptchaVerifier:any;
+  // public firebase:any = firestore;
+
+  constructor(private formBuilder: FormBuilder,
+    public db: AngularFireDatabase,
+    public authService: AuthServiceService,
+    public cacheService: CacheService,
+    public loginService:LoginService,
+    
+  ) {
     this.loginForm = this.formBuilder.group({
-      'name': [null, Validators.required],
-      'otp': [null,Validators.required],
-      'password': [null,Validators.required],
+      'uName': [null, Validators.required],
+      'otp': [null, Validators.required],
+      'password': [null, Validators.required],
     });
     var items = db.list('/users').valueChanges();
     console.log(items)
-   }
+  }
 
   ngOnInit() {
+    // this.recaptchaVerifier =this.firebase.auth.RecaptchaVerifier('recaptcha-container');
+  }
+
+  onSubmit(formVal) {
+    var isNum = /^\d+$/.test(formVal.value.uName);
+    var isEmail = /\S+@\S+/.test(formVal.value.uName);
+    console.log("name type", formVal, isNum, isEmail)
+    if (isNum) {
+      this.mobileLogin = true;
+      this.loginService.loginWithMobile(formVal.value.uName,this.recaptchaVerifier);
+    }
+    else if (isEmail) {
+      this.emailLogin = true;
+      this.loginService.loginWithEmail(formVal.value.uName, formVal.value.password);
+    }
+    else {
+      this.usernameLogin = true;
+      this.loginService.loginWithUserName(formVal.value.uName);
+    }
   }
 
 }

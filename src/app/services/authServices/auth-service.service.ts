@@ -5,7 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
   providedIn: 'root'
 })
 export class AuthServiceService {
-
+  
   constructor(private afAuth:AngularFireAuth) { }
   registerUser(value){
     this.afAuth.auth.createUserWithEmailAndPassword(value.email,value.password).then(res=>{

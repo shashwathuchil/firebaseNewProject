@@ -12,7 +12,6 @@ import { LoginComponent } from './login/login.component'
 export class AppComponent {
   title = 'firebaseNewProject';
   users:any=[];
-  notMember:boolean = true;
   constructor(db: AngularFireDatabase){
 
     // db.list('/users').valueChanges().subscribe(res=>{
@@ -20,8 +19,5 @@ export class AppComponent {
     //   console.log(this.users);
     // })
     
-  }
-  member(){
-    this.notMember = !this.notMember;
   }
 }

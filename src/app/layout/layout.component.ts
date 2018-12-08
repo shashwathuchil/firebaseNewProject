@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { RegisterComponent } from '../register/register.component'
+import { LoginComponent } from '../login/login.component'
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',

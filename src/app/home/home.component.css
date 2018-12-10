@@ -4,3 +4,9 @@
 .pointer{
     cursor: pointer;
 }
+.error{
+    color: red;
+}
+.form-group{
+    margin-top: 20px;
+}

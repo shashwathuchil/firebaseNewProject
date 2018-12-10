@@ -19,7 +19,7 @@ export class LoginService {
     this.afAuth.auth.signInWithEmailAndPassword(email,password).then(res=>{
       console.log("res",res);
       self.cacheService.isLogedIn = true;
-      this.sharedService.getUsers()
+      this.sharedService.getDrivers()
     }).catch(err=>{
       console.error("error",err)
     });

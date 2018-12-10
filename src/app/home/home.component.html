@@ -1,9 +1,120 @@
 <div>
   <div *ngIf="cacheService.isLogedIn">
     Welcome to Home page
-    <div *ngFor="let user of this.cacheService.users">{{user.name}}</div>
+    <div *ngFor="let driver of this.cacheService.drivers">
+      <div class="pointer link" (click)="expantDriver(driver)">{{driver.fName}} {{driver.lName}}</div>
+    </div>
     <div class="link pointer" (click)="logout()">
       logout
+    </div>
+    <hr/>
+    <div style="margin-top:20px">
+      <form [formGroup]="driversRegister" (ngSubmit)="onSubmit(driversRegister.value, driversRegister.valid)">
+        <div class="form-group">
+          <label for="fName">First Name</label>
+          <input class="form-control" name="fName" id="fName" type="text" formControlName="fName">
+          <div class="error" *ngIf="this.driversRegister.controls.fName.touched && !this.driversRegister.controls.fName.valid">
+            Please enter a first name
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="lName">Last Name</label>
+          <input class="form-control" name="lName" id="lName" type="text" formControlName="lName">
+          <div class="error" *ngIf="this.driversRegister.controls.lName.touched && !this.driversRegister.controls.lName.valid">
+            Please enter a Last name
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="pic">upload Photo</label>
+          <input class="form-control" name="pic" id="pic" type="file" formControlName="pic">
+          <div class="error" *ngIf="this.driversRegister.controls.pic.touched && !this.driversRegister.controls.pic.valid">
+            Please enter upload a photo
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="role">Role</label>
+          <select class="form-control" name="role" id="role" formControlName="role">
+            <option ngValue="driver">Driver</option>
+            <option ngValue="cleaner">Cleaner</option>
+            <option ngValue="owner">Owner</option>
+            <option ngValue="other">Other</option>
+          </select>
+          <div class="error" *ngIf="this.driversRegister.controls.role.touched && !this.driversRegister.controls.role.valid">
+            Please select the role
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="dob">enter Date of birth</label>
+          <input class="form-control" name="dob" id="dob" type="date" formControlName="dob">
+          <div class="error" *ngIf="this.driversRegister.controls.dob.touched && !this.driversRegister.controls.dob.valid">
+            Please enter date of birth
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="mStatus">Marital status</label>
+          <select class="form-control" name="mStatus" id="mStatus" formControlName="mStatus">
+            <option ngValue="married">Married</option>
+            <option ngValue="single">Single</option>
+          </select>
+          <div class="error" *ngIf="this.driversRegister.controls.mStatus.touched && !this.driversRegister.controls.mStatus.valid">
+            Please select the role
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input class="form-control" name="phone" id="phone" type="text" formControlName="phone">
+          <div class="error" *ngIf="this.driversRegister.controls.phone.touched && this.driversRegister.controls.phone.errors?.required">
+            Please enter a phone number
+          </div>
+          <div class="error" *ngIf="this.driversRegister.controls.phone.touched && this.driversRegister.controls.phone.errors?.minlength">
+            Phone number is lesser than 10 digits
+          </div>
+          <div class="error" *ngIf="this.driversRegister.controls.phone.touched && this.driversRegister.controls.phone.errors?.maxlength">
+            Phone number is more than 10 digits
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="aPhone">Alternative Phone</label>
+          <input class="form-control" name="aPhone" id="aPhone" type="text" formControlName="aPhone">
+          <div class="error" *ngIf="this.driversRegister.controls.aPhone.touched && this.driversRegister.controls.aPhone.errors?.required">
+            Please enter a Alternative Phone number
+          </div>
+          <div class="error" *ngIf="this.driversRegister.controls.aPhone.touched && this.driversRegister.controls.aPhone.errors?.minlength">
+            Phone number is lesser than 10 digits
+          </div>
+          <div class="error" *ngIf="this.driversRegister.controls.aPhone.touched && this.driversRegister.controls.aPhone.errors?.maxlength">
+            Phone number is more than 10 digits
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input class="form-control" name="address" id="address" type="text" formControlName="address">
+          <div class="error" *ngIf="this.driversRegister.controls.address.touched && !this.driversRegister.controls.address.valid">
+            Please enter the address
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="address2">state</label>
+          <select class="form-control" name="address2" id="address2" formControlName="address2">
+            <option *ngFor="let state of this.sharedService.states" [ngValue]=state.key>{{state.name}}</option>
+          </select>
+          <div class="error" *ngIf="this.driversRegister.controls.address2.touched && !this.driversRegister.controls.address2.valid">
+            Please select a status
+          </div>
+        </div>
+
+        <button type="submit">Submit</button>
+
+      </form>
     </div>
   </div>
   <div *ngIf="!cacheService.isLogedIn">

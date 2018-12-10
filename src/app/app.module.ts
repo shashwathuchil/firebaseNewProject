@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component'
 import {RouterModule, Routes} from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
+import { DriverDetailsComponent } from './driver-details/driver-details.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path:'login',
     component: LoginComponent
+  },
+  {
+    path:'driverDetail',
+    component: DriverDetailsComponent
   }
 ];
 
@@ -42,7 +47,8 @@ const routes: Routes = [
     RegisterComponent,
     LoginComponent,
     LayoutComponent,
-    HomeComponent
+    HomeComponent,
+    DriverDetailsComponent
   ],
   imports: [
     BrowserModule,

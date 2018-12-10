@@ -51,7 +51,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [AngularFireAuth
+  providers: [AngularFireAuth,
   ],
   bootstrap: [AppComponent]
 })

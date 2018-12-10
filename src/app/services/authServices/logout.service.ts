@@ -19,4 +19,13 @@ export class LogoutService {
     })
     this.cacheService.clearCache();
   }
+  isLoggedOut(){
+    if(this.afAuth.auth.currentUser){
+      this.cacheService.isLogedIn = true;
+    }
+    else{
+      this.cacheService.isLogedIn = false;
+    }
+    console.log("login status",this.afAuth.auth.currentUser)
+  }
 }

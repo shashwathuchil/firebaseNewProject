@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CacheService } from '../services/cacheServices/cache.service'
 import{ LogoutService } from '../services/authServices/logout.service'
 import { Router } from '@angular/router';
-import { PARAMETERS } from '@angular/core/src/util/decorators';
+import{ FormBuilder, FormGroup, Validator, Validators } from '@angular/forms'
+
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ export class HomeComponent implements OnInit {
     public logoutService: LogoutService,
     public router: Router
     ) { 
-    console.log(this.cacheService.isLogedIn)
+    console.log("is logged in",this.cacheService.isLogedIn)
   }
 
   ngOnInit() {

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
 import { RegisterComponent } from './register/register.component'
 import { LoginComponent } from './login/login.component'
+import { LogoutService } from './services/authServices/logout.service'
 
 @Component({
   selector: 'app-root',
@@ -12,12 +12,7 @@ import { LoginComponent } from './login/login.component'
 export class AppComponent {
   title = 'firebaseNewProject';
   users:any=[];
-  constructor(db: AngularFireDatabase){
-
-    // db.list('/users').valueChanges().subscribe(res=>{
-    //   this.users = res;
-    //   console.log(this.users);
-    // })
-    
+  constructor(public logoutService:LogoutService){
+    this.logoutService.isLoggedOut();
   }
 }

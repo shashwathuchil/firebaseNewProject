@@ -33,8 +33,6 @@ export class LoginComponent implements OnInit {
       'otp': [null, Validators.required],
       'password': [null, Validators.required],
     });
-    var items = db.list('/users').valueChanges();
-    console.log(items)
   }
 
   ngOnInit() {
@@ -48,15 +46,18 @@ export class LoginComponent implements OnInit {
     if (isNum) {
       this.mobileLogin = true;
       this.loginService.loginWithMobile(formVal.value.uName,this.recaptchaVerifier);
+      console.log("login with number");
     }
-    else if (isEmail) {
+    else if (isEmail && formVal.value.uName && formVal.value.password) {
       this.emailLogin = true;
       this.loginService.loginWithEmail(formVal.value.uName, formVal.value.password);
       this.router.navigate(['/home']);
+      console.log("login with email");
     }
     else {
       this.usernameLogin = true;
       this.loginService.loginWithUserName(formVal.value.uName);
+      console.log("login with user name");
     }
   }
 

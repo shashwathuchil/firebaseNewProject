@@ -1,6 +1,7 @@
 <div>
   <div *ngIf="cacheService.isLogedIn">
     Welcome to Home page
+    <div *ngFor="let user of this.cacheService.users">{{user.name}}</div>
     <div class="link pointer" (click)="logout()">
       logout
     </div>

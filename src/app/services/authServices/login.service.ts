@@ -6,22 +6,22 @@ import { AngularFireAuth } from 'angularfire2/auth';
   providedIn: 'root'
 })
 export class LoginService {
-  public cacheService:CacheService
-  constructor(private afAuth:AngularFireAuth) {
+  
+  constructor(private afAuth:AngularFireAuth, 
+    public cacheService:CacheService,
+    ) {
    }
 
   loginWithEmail(email,password){
-    let self= this.cacheService;
-    this.afAuth.auth.signInWithEmailAndPassword(email,password).subscribe(res=>{
-      
-    })
-    // .then(res=>{
-    //   self.
-    //    = true;
-    //   console.log("login successfull",res);
-    // }).catch(err=>{
-    //   console.error("login error",err)
-    // });
+    let self = this;
+    this.afAuth.auth.signInWithEmailAndPassword(email,password).then(res=>{
+      console.log("res",res);
+      self.cacheService.isLogedIn = true;
+    }).catch(err=>{
+      console.error("error",err)
+    });
+    
+    
   }
   loginWithMobile(value, appverifier){
     this.cacheService.enableOtp = true;

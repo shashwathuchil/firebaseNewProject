@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { Router } from '@angular/router';
 import { AngularFireDatabase } from 'angularfire2/database';
-// import {firestore} from 'firebase/app';
+
 import { AuthServiceService } from '../services/authServices/auth-service.service'
 import { CacheService } from '../services/cacheServices/cache.service'
 import { LoginService } from '../services/authServices/login.service'
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
     public authService: AuthServiceService,
     public cacheService: CacheService,
     public loginService:LoginService,
-    
+    public router: Router
   ) {
     this.loginForm = this.formBuilder.group({
       'uName': [null, Validators.required],
@@ -51,6 +52,7 @@ export class LoginComponent implements OnInit {
     else if (isEmail) {
       this.emailLogin = true;
       this.loginService.loginWithEmail(formVal.value.uName, formVal.value.password);
+      this.router.navigate(['/home']);
     }
     else {
       this.usernameLogin = true;

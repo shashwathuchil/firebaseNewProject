@@ -12,18 +12,27 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component'
 import {RouterModule, Routes} from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'register',
+    redirectTo: 'welcome',
     pathMatch: 'full'
   },
   {
-    path: 'register',
+    path: 'welcome',
     component: LayoutComponent
+  },
+  {
+    path:'home',
+    component: HomeComponent
+  },
+  {
+    path:'login',
+    component: LoginComponent
   }
 ];
 
@@ -33,6 +42,7 @@ const routes: Routes = [
     RegisterComponent,
     LoginComponent,
     LayoutComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

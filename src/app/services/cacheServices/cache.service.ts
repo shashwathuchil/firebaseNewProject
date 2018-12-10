@@ -9,4 +9,8 @@ export class CacheService {
   public isLogedIn : boolean = false;
 
   constructor() { }
+  clearCache(){
+    this.enableOtp = false;
+    this.isLogedIn = false;
+  }
 }

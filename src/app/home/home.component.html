@@ -1,0 +1,12 @@
+<div>
+  <div *ngIf="cacheService.isLogedIn">
+    Welcome to Home page
+    <div class="link pointer" (click)="logout()">
+      logout
+    </div>
+  </div>
+  <div *ngIf="!cacheService.isLogedIn">
+    Your not logged in please <span class="link pointer" (click)="login()">login</span> in to continue
+  </div>
+
+</div>

@@ -16,6 +16,7 @@ import { HomeComponent } from './home/home.component'
 import {RouterModule, Routes} from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { DriverDetailsComponent } from './driver-details/driver-details.component';
+import { DriverFormComponent } from './driver-form/driver-form.component';
 
 const routes: Routes = [
   {
@@ -48,7 +49,8 @@ const routes: Routes = [
     LoginComponent,
     LayoutComponent,
     HomeComponent,
-    DriverDetailsComponent
+    DriverDetailsComponent,
+    DriverFormComponent
   ],
   imports: [
     BrowserModule,

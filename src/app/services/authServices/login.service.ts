@@ -20,6 +20,7 @@ export class LoginService {
       console.log("res",res);
       self.cacheService.isLogedIn = true;
       this.sharedService.getDrivers()
+      this.sharedService.getUserDetail(res.user.uid)
     }).catch(err=>{
       console.error("error",err)
     });
@@ -30,6 +31,6 @@ export class LoginService {
     this.cacheService.enableOtp = true;
   }
   loginWithUserName(value){
-
+    
   }
 }

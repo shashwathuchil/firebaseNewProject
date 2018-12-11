@@ -162,20 +162,25 @@ export class SharedService {
     ]
   }
 
-  getUsers() {
-    this.db.list('/users').valueChanges().subscribe(res => {
+  getUserDetail(id) {
+    this.db.object('/users').valueChanges().subscribe(res => {
       console.log("user fetch success", res)
       this.cacheService.users = res;
+
+      this.cacheService.userDetails = this.cacheService.users[id]
+
+      console.log("user details", this.cacheService.userDetails);
     }, err => {
       console.error("user fetch error", err)
     })
+
   }
-  pushDrivers(value){
+  pushDrivers(value) {
     const items = this.db.list('/driversList');
     items.push(value);
   }
-  getDrivers(){
-    this.db.list('/driversList').valueChanges().subscribe(res => {
+  getDrivers() {
+    this.db.object('/driversList').valueChanges().subscribe(res => {
       console.log("driversList fetch success", res)
       this.cacheService.drivers = res;
     }, err => {

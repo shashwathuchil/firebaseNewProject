@@ -1,16 +1,24 @@
 <div>
   <div *ngIf="cacheService.isLogedIn">
     <h3>Driver details</h3>
-    <hr/>
-    <div>Frist name: {{cacheService.driverDetail.fName}}</div>
-    <div>Last name: {{cacheService.driverDetail.lName}}</div>
-    <div>Role: {{cacheService.driverDetail.role}}</div>
-    <div>Date of birth: {{cacheService.driverDetail.dob | date: 'dd/MM/yyyy'}}</div>
-    <div>Marital status: {{cacheService.driverDetail.mStatus}}</div>
-    <div>Phone: {{cacheService.driverDetail.phone}}</div>
-    <div>Address: {{cacheService.driverDetail.address}}</div>
+    <hr />
+    <div>Frist name: {{cacheService.driverDetail.value.fName}}</div>
+    <div>Last name: {{cacheService.driverDetail.value.lName}}</div>
+    <div>Role: {{cacheService.driverDetail.value.role}}</div>
+    <div>Date of birth: {{cacheService.driverDetail.value.dob | date: 'dd/MM/yyyy'}}</div>
+    <div>Marital status: {{cacheService.driverDetail.value.mStatus}}</div>
+    <div>Phone: {{cacheService.driverDetail.value.phone}}</div>
+    <div>Address: {{cacheService.driverDetail.value.address}}</div>
     <div>State: {{state.name}}</div>
+
+    <div *ngIf="isEdit">
+      <app-driver-form></app-driver-form>
+    </div>
+    <div>delete</div>
+    <div (click)="editDriverForm()">edit</div>
   </div>
+
+
   <div *ngIf="!cacheService.isLogedIn">
     Your not logged in please <span class="link pointer" (click)="login()">login</span> in to continue
   </div>

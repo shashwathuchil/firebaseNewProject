@@ -9,7 +9,8 @@ export class CacheService {
   public isLogedIn : boolean = false;
   public users : any;
   public drivers: any;
-  public driverDetail: any
+  public driverDetail: any;
+  public userDetails:any;
   constructor() {
    }
   clearCache(){
@@ -18,5 +19,6 @@ export class CacheService {
     this.users = null;
     this.drivers = null;
     this.driverDetail = null;
+    this.userDetails = null;
   }
 }

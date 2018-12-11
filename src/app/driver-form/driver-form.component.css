@@ -1,0 +1,15 @@
+.link{
+    color: blue;
+}
+.pointer{
+    cursor: pointer;
+}
+.error{
+    color: red;
+}
+.form-group{
+    margin-top: 20px;
+}
+.pull-right{
+    float: right;
+}

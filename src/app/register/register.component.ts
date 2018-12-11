@@ -36,12 +36,9 @@ export class RegisterComponent implements OnInit {
   onSubmit(value,valid){
     console.log("value",value);
     console.log("validation",valid);
-    const items = this.db.list('/users');
     delete value.confirmPassword;
-    items.push(value);
     this.authService.registerUser(value);
     this.registerForm.reset();
-
   }
 
 }

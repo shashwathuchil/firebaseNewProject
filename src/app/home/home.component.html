@@ -1,10 +1,12 @@
 <div>
   <div *ngIf="cacheService.isLogedIn">
     Welcome to Home page
+    <hr/>
+    <h3>Drivers list</h3>
     <div *ngFor="let driver of this.cacheService.drivers">
       <div class="pointer link" (click)="expantDriver(driver)">{{driver.fName}} {{driver.lName}}</div>
     </div>
-    <div class="link pointer" (click)="logout()">
+    <div class="link pointer pull-right" (click)="logout()">
       logout
     </div>
     <hr/>
@@ -108,7 +110,7 @@
             <option *ngFor="let state of this.sharedService.states" [ngValue]=state.key>{{state.name}}</option>
           </select>
           <div class="error" *ngIf="this.driversRegister.controls.address2.touched && !this.driversRegister.controls.address2.valid">
-            Please select a status
+            Please select a state
           </div>
         </div>
 

@@ -1,11 +1,17 @@
 <div>
-  <div>Driver details</div>
-  <div>Frist name: {{cacheService.driverDetail.fName}}</div>
-  <div>Last name: {{cacheService.driverDetail.lName}}</div>
-  <div>Role: {{cacheService.driverDetail.role}}</div>
-  <div>Date of birth: {{cacheService.driverDetail.dob | date: 'dd/MM/yyyy'}}</div>
-  <div>Marital status: {{cacheService.driverDetail.mStatus}}</div>
-  <div>Phone: {{cacheService.driverDetail.phone}}</div>
-  <div>Address: {{cacheService.driverDetail.address}}</div>
-  <div>State: {{state.name}}</div>
+  <div *ngIf="cacheService.isLogedIn">
+    <h3>Driver details</h3>
+    <hr/>
+    <div>Frist name: {{cacheService.driverDetail.fName}}</div>
+    <div>Last name: {{cacheService.driverDetail.lName}}</div>
+    <div>Role: {{cacheService.driverDetail.role}}</div>
+    <div>Date of birth: {{cacheService.driverDetail.dob | date: 'dd/MM/yyyy'}}</div>
+    <div>Marital status: {{cacheService.driverDetail.mStatus}}</div>
+    <div>Phone: {{cacheService.driverDetail.phone}}</div>
+    <div>Address: {{cacheService.driverDetail.address}}</div>
+    <div>State: {{state.name}}</div>
+  </div>
+  <div *ngIf="!cacheService.isLogedIn">
+    Your not logged in please <span class="link pointer" (click)="login()">login</span> in to continue
+  </div>
 </div>

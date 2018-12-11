@@ -45,8 +45,9 @@ export class HomeComponent implements OnInit {
   }
   onSubmit(value,valid){
     if (valid){
-      console.log(value)
+      console.log("form value",value)
       this.sharedService.pushDrivers(value);
+      this.driversRegister.reset();
     }
   }
   expantDriver(data){
